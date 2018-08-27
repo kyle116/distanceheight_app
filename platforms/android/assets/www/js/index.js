@@ -44,8 +44,6 @@ var app = {
             if(app.secondPress === 2) {
                 app.origLocation = app.location;
                 app.location = position;
-                // alert('App.origLocation' + JSON.stringify(app.origLocation));
-                // alert('App.location' + JSON.stringify(app.location));
                 // Rounded 2 decimal places
                 app.walkDistance = Math.round(distance(app.origLocation['coords']['latitude'], app.origLocation['coords']['longitude'], app.location['coords']['latitude'], app.location['coords']['longitude'], 'F') * 100)/100;
                 app.location = {};
@@ -67,10 +65,10 @@ var app = {
 
         // https://www.geodatasource.com/developers/javascript
         function distance(lat1, lon1, lat2, lon2, unit) {
-            var radlat1 = Math.PI * lat1/180
-            var radlat2 = Math.PI * lat2/180
-            var theta = lon1-lon2
-            var radtheta = Math.PI * theta/180
+            var radlat1 = Math.PI * lat1/180;
+            var radlat2 = Math.PI * lat2/180;
+            var theta = lon1 - lon2;
+            var radtheta = Math.PI * theta/180;
             var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
             if (dist > 1) {
                 dist = 1;
@@ -118,28 +116,19 @@ var app = {
             if(app.treeBottom !== 0 && app.treeTop !== 0) {
                 var angle1 = 90 - app.treeBottom;
                 var angle2 = app.treeBottom;
-                // var side3 = app.walkDistance;
                 var side2 = 6;
                 var angle1Rad = toRadians(angle1);
-                // var angle1 = 0;
                 var angle2Rad = toRadians(angle2);
-                // var angle3Rad = ((90 - app.treeBottom) *Math.PI)/180;
-                // var side2 = side3/Math.sin(angle3) * Math.sin(angle2);
-                // var side1 = Math.sqrt(Math.pow(2, side2) - Math.pow(2, side3));
                 var side1 = (side2 * Math.sin(angle1Rad))/Math.sin(angle2Rad);
-                // console.log(angle1, angle2, angle3, side1, side2, side3)
 
                 var angle3 = app.treeTop - 90;
                 var angle4 = 90 - angle3;
-                // var side6 = app.walkDistance;
+                var side4 = 6;
                 var angle3Rad = toRadians(angle3);
                 var angle4Rad = toRadians(angle4);
-                // var angle6Rad = ((90 - app.treeTop) *Math.PI)/180;
-                var side4 = 6;
-                // var side5 = (side6/Math.sin(angle6)) * Math.sin(angle5);
-                // var side4 = Math.sqrt(Math.pow(2, side5) - Math.pow(2, side6));
                 var side3 = (side4 * Math.sin(angle3Rad))/Math.sin(angle4Rad);
                 console.log(angle1, angle2, angle3, angle4, side1, side2, side3, side4)
+                
                 var height = side1 + side3;
                 console.log('Height ' + height);
             }
@@ -149,17 +138,12 @@ var app = {
             $('#output').text('Output: ' + height);
         }
 
-        document.getElementById("showLocalStorage").addEventListener("click", testFunc);
-        document.getElementById("treeTop").addEventListener("click", angles);
-        document.getElementById("treeBottom").addEventListener("click", angles);
-
         // Device orientation test
         var output = $('#output');
         function handleOrientation(event) {
             app.x = event.beta;  // In degree in the range [-180,180] tilt vert
             app.y = event.gamma; // In degree in the range [-90,90] tilt horizontal
             app.z = event.alpha; // spin
-            // console.log(app.x, app.y, app.z)
         }
 
         if (window.DeviceOrientationEvent) {
@@ -176,7 +160,6 @@ var app = {
             var z = event.accelerationIncludingGravity.z;
 
             // Do something awesome
-            // console.log(JSON.stringify(event))
             console.log(event.acceleration.x + ' m/s2');
             var lastTimestamp;
             var speedX = 0, speedY = 0, speedZ = 0;
@@ -197,32 +180,40 @@ var app = {
 
         // Camera
         let options = {
-          x: window.screen.width/4,
-          y: 20,
-          width: window.screen.width/2,
-          height: window.screen.height/2,
-          camera: CameraPreview.CAMERA_DIRECTION.BACK,
-          toBack: true,
-          tapPhoto: true,
-          tapFocus: false,
-          previewDrag: false
+            x: window.screen.width/4,
+            y: 20,
+            width: window.screen.width/2,
+            height: window.screen.height/2,
+            camera: CameraPreview.CAMERA_DIRECTION.BACK,
+            toBack: true,
+            tapPhoto: true,
+            tapFocus: false,
+            previewDrag: false
         };
+        
+        var newLeft = parseInt($('.crosshair').css('left'));
+        var newTop = parseInt($('.crosshair').css('top'));
         function cameraFunction() {
+            $('html').css('background-color', 'transparent');
+            $('body').css('background-color', 'transparent');
+            $('.crosshair').css('display', 'block');
+            $('.crosshair').css('left', (newLeft - 50) + 'px');
+            $('.crosshair').css('top', (newTop + 30) + 'px');
             CameraPreview.startCamera(options);
         }
 
         function cameraFunctionStop() {
+            $('.crosshair').css('display', 'none');
+            $('html').css('background-color', '#E4E4E4');
+            $('body').css('background-color', '#E4E4E4');
             CameraPreview.stopCamera();
         }
         
+        document.getElementById("showLocalStorage").addEventListener("click", testFunc);
+        document.getElementById("treeTop").addEventListener("click", angles);
+        document.getElementById("treeBottom").addEventListener("click", angles);
         document.getElementById("camera").addEventListener("click", cameraFunction);
         document.getElementById("cameraStop").addEventListener("click", cameraFunctionStop);
-        $('html').css('background-color', 'transparent');
-        $('body').css('background-color', 'transparent');
-        var newLeft = parseInt($('.temp').css('left'));
-        var newTop = parseInt($('.temp').css('top'));
-        $('.temp').css('left', (newLeft - 50) + 'px');
-        $('.temp').css('top', (newTop + 30) + 'px');
     },
 
     // Update DOM on a Received Event
