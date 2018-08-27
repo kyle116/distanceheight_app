@@ -35,35 +35,33 @@
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <title>Hello World</title>
         <style>
+            .container {
+                padding-top: 65vh;
+            }
+            .column {
+                float: left;
+                width: 46%;
+                padding: 10px;
+            }
+            #output, #buttons {
+                height: 30vh;
+            }
             .but {
                 background-color: #4CAF50;
                 border: none;
                 color: white;
-                padding: 15px 32px;
                 text-align: center;
                 text-decoration: none;
                 display: inline-block;
                 font-size: 16px;
                 margin: 4px 2px;
                 cursor: pointer;
+                width: 47%;
+                height: 50px;
+                z-index: -1;
             }
-            #watercup {
-                border:2px solid #aaa;
-                width:100px;
-                height:200px;
-                background: linear-gradient(to bottom, white 20%, lightblue 20%, blue);
-                margin: 20px auto;
-            }
-
-            .textOverlay {
-                position: absolute;
-                height: 100vh;
-                width: 100vw;
-                top: 0px;
-                right: 0px;
-                bottom: 0px;
-                left: 0px;
-                text-shadow: 2px 2px #fff;
+            .startButton {
+                width: 100%;
             }
 
             .crosshair {
@@ -79,34 +77,44 @@
                 /*background-image: url('./img/plus.png');*/
             }
 
-            html, body {
+/*            html, body {
                 background-color: transparent;
+            }*/
+            #output {
+                font-size: 15pt;
+                color: black;
+                height: 50px;
             }
-            #outputTop, #outputBottom, #output {
-                color: white;
+            .innerColumn {
+                width: 48%;
+                display: inline-block;
+                height: 50px;
             }
         </style>
     </head>
     <body>
-        <div class="textOverlay">
-            <img src="./img/plus.png" class="crosshair">
-            <!-- <div class="crosshair"></div> -->
-        </div>
+        <img src="./img/plus.png" class="crosshair">
         <div class="app">
             <h1>Apache Cordova</h1>
             <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
             </div>
-            <button id="showLocalStorage" class="but">Start</button>
-            <h1 id="distance">0</h1>
-            <button id="treeTop" class="but">Top</button>
-            <button id="treeBottom" class="but">Bottom</button>
-            <button id="camera" class="but">Camera</button>
-            <button id="cameraStop" class="but">Camera Stop</button>
-            <div id="outputTop">0</div>
-            <div id="outputBottom">0</div>
-            <div id="output"></div>
+        </div>
+        <div class="container">
+            <div id="buttons" class="column">
+                <button id="showLocalStorage" class="but startButton">Start</button>
+                <button id="treeTop" class="but">Top</button>
+                <button id="treeBottom" class="but">Bottom</button>
+                <button id="camera" class="but">Camera</button>
+                <button id="cameraStop" class="but">Camera Stop</button>
+            </div>
+            <div id="output" class="column">
+                <div class="innerColumn">Distance: </div><div id="distance" class="innerColumn">0</div>
+                <div class="innerColumn">Top: </div><div id="outputTop" class="innerColumn">0</div>
+                <div class="innerColumn">Bottom: </div><div id="outputBottom" class="innerColumn">0</div>
+                <div class="innerColumn">Height: </div><div id="outputHeight" class="innerColumn">0</div>
+            </div>
         </div>
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>

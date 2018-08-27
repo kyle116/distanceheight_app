@@ -105,7 +105,6 @@ var app = {
         }
 
         function angles(e) {
-            console.log(e.target.id)
             if(e.target.id === 'treeTop') {
                 app.treeTop = app.x;
             } else if(e.target.id === 'treeBottom') {
@@ -115,16 +114,16 @@ var app = {
             if(app.treeBottom !== 0 && app.treeTop !== 0) {
                 var angle1 = 90 - app.treeBottom;
                 var angle2 = app.treeBottom;
-                var side2 = 6;
-                // var side2 = app.walkDistance;
+                // var side2 = 6;
+                var side2 = app.walkDistance;
                 var angle1Rad = toRadians(angle1);
                 var angle2Rad = toRadians(angle2);
                 var side1 = (side2 * Math.sin(angle1Rad))/Math.sin(angle2Rad);
 
                 var angle3 = app.treeTop - 90;
                 var angle4 = 90 - angle3;
-                var side4 = 6;
-                // var side4 = app.walkDistance;
+                // var side4 = 6;
+                var side4 = app.walkDistance;
                 var angle3Rad = toRadians(angle3);
                 var angle4Rad = toRadians(angle4);
                 var side3 = (side4 * Math.sin(angle3Rad))/Math.sin(angle4Rad);
@@ -134,13 +133,13 @@ var app = {
                 console.log('Height ' + height);
             }
             console.log('app.treeTop: ' + app.treeTop + ' app.treeBottom: ' + app.treeBottom + '. Angle: ' + (app.treeTop - app.treeBottom));
-            $('#outputTop').text('Top: ' + app.treeTop);
-            $('#outputBottom').text('Bottom: ' + app.treeBottom);
-            $('#output').text('Output: ' + height);
+            $('#outputTop').text(Math.round(app.treeTop * 100)/100 + ' Degrees');
+            $('#outputBottom').text(Math.round(app.treeBottom * 100)/100 + ' Degrees');
+            $('#outputHeight').text(Math.round(height * 100)/100 + ' Feet');
         }
 
         // Device orientation test
-        var output = $('#output');
+        var output = $('#outputHeight');
         function handleOrientation(event) {
             app.x = event.beta;  // In degree in the range [-180,180] tilt vert
             app.y = event.gamma; // In degree in the range [-90,90] tilt horizontal
@@ -180,7 +179,7 @@ var app = {
 
 
         // Camera
-        let options = {
+        var options = {
             x: window.screen.width/4,
             y: 20,
             width: window.screen.width/2,
@@ -204,9 +203,9 @@ var app = {
         }
 
         function cameraFunctionStop() {
-            $('.crosshair').css('display', 'none');
             $('html').css('background-color', '#E4E4E4');
             $('body').css('background-color', '#E4E4E4');
+            $('.crosshair').css('display', 'none');
             CameraPreview.stopCamera();
         }
         
