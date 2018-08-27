@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <title>Hello World</title>
+        <style>
+            .but {
+                background-color: #4CAF50;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+            #watercup {
+                border:2px solid #aaa;
+                width:100px;
+                height:200px;
+                background: linear-gradient(to bottom, white 20%, lightblue 20%, blue);
+                margin: 20px auto;
+            }
+
+            .textOverlay {
+                position: absolute;
+                height: 100vh;
+                width: 100vw;
+                top: 0px;
+                right: 0px;
+                bottom: 0px;
+                left: 0px;
+                text-shadow: 2px 2px #fff;
+            }
+
+            .temp {
+                position: absolute;
+                left: 50vw;
+                top: 25vw;
+                /* color: white; */
+                height: 100px;
+                width: 100px;
+                /*background-color: white;*/
+                display: block;
+                /*border: 2px solid #aaa;*/
+                /*background-image: url('./img/plus.png');*/
+            }
+
+            html, body {
+                background-color: transparent;
+            }
+            #outputTop, #outputBottom, #output {
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="textOverlay">
+            <img src="./img/plus.png" class="temp">
+            <!-- <div class="temp"></div> -->
+        </div>
+        <div class="app">
+            <h1>Apache Cordova</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+            </div>
+            <button id="showLocalStorage" class="but">Start</button>
+            <h1 id="distance">0</h1>
+            <button id="treeTop" class="but">Top</button>
+            <button id="treeBottom" class="but">Bottom</button>
+            <button id="camera" class="but">Camera</button>
+            <button id="cameraStop" class="but">Camera Stop</button>
+            <div id="outputTop">0</div>
+            <div id="outputBottom">0</div>
+            <div id="output"></div>
+        </div>
+        <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>
