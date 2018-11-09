@@ -39,8 +39,6 @@ import org.apache.cordova.LOG;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.Exception;
 import java.lang.Integer;
@@ -82,7 +80,6 @@ public class CameraActivity extends Fragment {
   public boolean dragEnabled;
   public boolean tapToFocus;
   public boolean disableExifHeaderStripping;
-  public boolean storeToFile;
   public boolean toBack;
 
   public int width;
@@ -406,17 +403,6 @@ public class CameraActivity extends Fragment {
     return 0;
   }
 
-  private String getTempDirectoryPath() {
-    File cache = null;
-
-    // Use internal storage
-    cache = getActivity().getCacheDir();
-
-    // Create the cache directory if it doesn't exist
-    cache.mkdirs();
-    return cache.getAbsolutePath();
-}
-
   PictureCallback jpegPictureCallback = new PictureCallback(){
     public void onPictureTaken(byte[] data, Camera arg1){
       Log.d(TAG, "CameraPreview jpegPictureCallback");
@@ -447,17 +433,9 @@ public class CameraActivity extends Fragment {
           }
         }
 
-        if (!storeToFile) {
-          String encodedImage = Base64.encodeToString(data, Base64.NO_WRAP);
+        String encodedImage = Base64.encodeToString(data, Base64.NO_WRAP);
 
-          eventListener.onPictureTaken(encodedImage);
-        } else {
-          String path = getTempDirectoryPath() + "/capture.jpg";
-          FileOutputStream out = new FileOutputStream(path);
-          out.write(data);
-          out.close();
-          eventListener.onPictureTaken(path);
-        }
+        eventListener.onPictureTaken(encodedImage);
         Log.d(TAG, "CameraPreview pictureTakenHandler called back");
       } catch (OutOfMemoryError e) {
         // most likely failed to allocate memory for rotateBitmap
@@ -564,7 +542,7 @@ public class CameraActivity extends Fragment {
           params.setPictureSize(size.width, size.height);
           currentQuality = quality;
 
-          if(cameraCurrentlyLocked == Camera.CameraInfo.CAMERA_FACING_FRONT && !storeToFile) {
+          if(cameraCurrentlyLocked == Camera.CameraInfo.CAMERA_FACING_FRONT) {
             // The image will be recompressed in the callback
             params.setJpegQuality(99);
           } else {

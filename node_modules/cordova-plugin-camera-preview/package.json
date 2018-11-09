@@ -1,24 +1,27 @@
 {
-  "_from": "git+https://github.com/cordova-plugin-camera-preview/cordova-plugin-camera-preview.git",
+  "_from": "cordova-plugin-camera-preview",
   "_id": "cordova-plugin-camera-preview@0.10.0",
   "_inBundle": false,
-  "_integrity": "",
+  "_integrity": "sha512-J4b5S8iKslHye/7qnUIdWXm8jbFQqfEYnYjaPSnzMdZQ+PKLLAfPVV6F6Z7yEyg/Fn3LnEC9hoOhdFUvnqWfIw==",
   "_location": "/cordova-plugin-camera-preview",
   "_phantomChildren": {},
   "_requested": {
-    "type": "git",
-    "raw": "https://github.com/cordova-plugin-camera-preview/cordova-plugin-camera-preview.git",
-    "rawSpec": "https://github.com/cordova-plugin-camera-preview/cordova-plugin-camera-preview.git",
-    "saveSpec": "git+https://github.com/cordova-plugin-camera-preview/cordova-plugin-camera-preview.git",
-    "fetchSpec": "https://github.com/cordova-plugin-camera-preview/cordova-plugin-camera-preview.git",
-    "gitCommittish": null
+    "type": "tag",
+    "registry": true,
+    "raw": "cordova-plugin-camera-preview",
+    "name": "cordova-plugin-camera-preview",
+    "escapedName": "cordova-plugin-camera-preview",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "git+https://github.com/cordova-plugin-camera-preview/cordova-plugin-camera-preview.git#bb82ece84289afed18983ca01233c233d37a1fdb",
-  "_spec": "https://github.com/cordova-plugin-camera-preview/cordova-plugin-camera-preview.git",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-camera-preview/-/cordova-plugin-camera-preview-0.10.0.tgz",
+  "_shasum": "8f0bf7ae79bdd99b413bc3a18da4c7b5d3389f27",
+  "_spec": "cordova-plugin-camera-preview",
   "_where": "/Users/kyleliu/GLOBE/distance_app/node_modules",
   "author": {
     "name": "Weston Ganger",

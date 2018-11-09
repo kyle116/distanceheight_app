@@ -5,86 +5,93 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0207DA571B56EA530066E2B4 /* Images.xcassets */; };
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		2E17DAE7E58647D7AD2D9BEA /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF565C46E63749FCAF55C6EC /* CoreImage.framework */; };
 		301BF552109A68D80062928A /* libCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 301BF535109A57CC0062928A /* libCordova.a */; };
 		302D95F114D2391D003F00A1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302D95EF14D2391D003F00A1 /* MainViewController.m */; };
 		302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 302D95F014D2391D003F00A1 /* MainViewController.xib */; };
-		3047A5121AB8059700498E2A /* build-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3047A50F1AB8059700498E2A /* build-debug.xcconfig */; };
-		3047A5131AB8059700498E2A /* build-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3047A5101AB8059700498E2A /* build-release.xcconfig */; };
-		3047A5141AB8059700498E2A /* build.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3047A5111AB8059700498E2A /* build.xcconfig */; };
+		3802ECD1CBCF4D74A64D866A /* CameraSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3679D330139453DB136213C /* CameraSessionManager.m */; };
+		4D99D6F36F3B4D9EBC22477C /* CameraPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 472B2812C68247119C1CA11A /* CameraPreview.m */; };
+		68A7FD7AB0234293BF2758EB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F45394180564DC683CCC4DF /* QuartzCore.framework */; };
 		6AFF5BF91D6E424B00AB3073 /* CDVLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AFF5BF81D6E424B00AB3073 /* CDVLaunchScreen.storyboard */; };
-		AACD95B6228F4181B542C8C1 /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FD13183ED24FE2A70FA0CA /* CDVLocation.m */; };
-		EDE71080308F46839725FE43 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E855E84B885441C9A3798715 /* CoreLocation.framework */; };
-		E713F08B55CB4A2F8DD56850 /* CameraPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E39662FB6B84B3484CBDFE4 /* CameraPreview.m */; };
-		77FE84CE086F44CA9B2847AD /* TemperatureAndTint.m in Sources */ = {isa = PBXBuildFile; fileRef = 827F6128281948DEBD7970EB /* TemperatureAndTint.m */; };
-		ADC24DDFE7EF4BCEB5C976CC /* CameraSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 61253BEB766543B68ABB95A3 /* CameraSessionManager.m */; };
-		8198E29C8326476188B37B58 /* CameraRenderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4295189CEE4C26B6D88F94 /* CameraRenderController.m */; };
-		C3304E778FDD4710BF13A6BE /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 230C07F26E6A4DBFBFC267EA /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		FC98A91BAA10420FBFC02093 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F38D4A5A529A4C19958F9987 /* CoreImage.framework */; };
-		CD47CFDE049A4C199CE8298A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A59BCD313D94F6180561D31 /* OpenGLES.framework */; };
-		726895F760D44A44937BE035 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6C11895B3F418D8C1E2C17 /* GLKit.framework */; };
-		79D6A1C5D7D2435CBF60FB62 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDCFA5FD7AB04FC99A268B62 /* CoreVideo.framework */; };
-		701B6CA8D08D4BE7B15F9C93 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7124D7D4410B4A0E908F09BB /* QuartzCore.framework */; };
+		7C7FAA1021994C0A9E6F0C09 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D2FC75A56E944759F06FB28 /* CoreLocation.framework */; };
+		87596C20CAE939F041CFF690 /* libPods-DistanceApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFF7926D25D7A3AB79B368C6 /* libPods-DistanceApp.a */; };
+		90BCFB17A03B467CAA739097 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E73696851304256B52E0E49 /* OpenGLES.framework */; };
+		90E38AACA7664611AD249D41 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 633BD38FDB3249CEB874B786 /* GLKit.framework */; };
+		96794303FEFD48F7BC6FC5E6 /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = B7074FDC2DCE4140A3FC7827 /* CDVLocation.m */; };
+		A6AD12131EB549BCA5CC4A21 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB901E9A70F147CE939AED8D /* CoreVideo.framework */; };
+		D7F2C760AD694C34A41033BC /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC66513C8494E48BE086FDB /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F71E672E24D74D91A26B8602 /* TemperatureAndTint.m in Sources */ = {isa = PBXBuildFile; fileRef = 59EE772EA8384E2DA21DEBC3 /* TemperatureAndTint.m */; };
+		FB0CF4B7FE0D4D5E8B03BC3F /* CameraRenderController.m in Sources */ = {isa = PBXBuildFile; fileRef = F136F2E760534CEB864B4941 /* CameraRenderController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		301BF534109A57CC0062928A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */;
+			containerPortal = 301BF52D109A57CC0062928A /* CordovaLib/CordovaLib.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D2AAC07E0554694100DB518D;
 			remoteInfo = CordovaLib;
 		};
 		301BF550109A68C00062928A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */;
+			containerPortal = 301BF52D109A57CC0062928A /* CordovaLib/CordovaLib.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = CordovaLib;
 		};
+		82D832052193BE1F00DB5EC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 301BF52D109A57CC0062928A /* CordovaLib/CordovaLib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C0C01EB21E3911D50056E6CB;
+			remoteInfo = Cordova;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0207DA571B56EA530066E2B4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "DistanceApp/Images.xcassets"; sourceTree = SOURCE_ROOT; };
+		00A600BC7CED4ABB81129F85 /* TemperatureAndTint.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = TemperatureAndTint.h; path = "cordova-plugin-camera-preview/TemperatureAndTint.h"; sourceTree = "<group>"; };
+		01DE4360AF924281A2D51D72 /* CameraSessionManager.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CameraSessionManager.h; path = "cordova-plugin-camera-preview/CameraSessionManager.h"; sourceTree = "<group>"; };
+		0207DA571B56EA530066E2B4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = DistanceApp/Images.xcassets; sourceTree = SOURCE_ROOT; };
+		0D2FC75A56E944759F06FB28 /* CoreLocation.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* DistanceApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DistanceApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* DistanceApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DistanceApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CordovaLib/CordovaLib.xcodeproj; sourceTree = "<group>"; };
+		301BF52D109A57CC0062928A /* CordovaLib/CordovaLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CordovaLib/CordovaLib.xcodeproj; sourceTree = "<group>"; };
 		301BF56E109A69640062928A /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = SOURCE_ROOT; };
 		302D95EE14D2391D003F00A1 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		302D95EF14D2391D003F00A1 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		302D95F014D2391D003F00A1 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
-		3047A50F1AB8059700498E2A /* build-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "build-debug.xcconfig"; path = cordova/build-debug.xcconfig; sourceTree = SOURCE_ROOT; };
-		3047A5101AB8059700498E2A /* build-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "build-release.xcconfig"; path = cordova/build-release.xcconfig; sourceTree = SOURCE_ROOT; };
+		3047A50F1AB8059700498E2A /* build-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "build-debug.xcconfig"; path = "cordova/build-debug.xcconfig"; sourceTree = SOURCE_ROOT; };
+		3047A5101AB8059700498E2A /* build-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "build-release.xcconfig"; path = "cordova/build-release.xcconfig"; sourceTree = SOURCE_ROOT; };
 		3047A5111AB8059700498E2A /* build.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = build.xcconfig; path = cordova/build.xcconfig; sourceTree = SOURCE_ROOT; };
 		32CA4F630368D1EE00C91783 /* DistanceApp-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DistanceApp-Prefix.pch"; sourceTree = "<group>"; };
-		6AFF5BF81D6E424B00AB3073 /* CDVLaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = CDVLaunchScreen.storyboard; path = "DistanceApp/CDVLaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
+		3FDAC18741834DA4B1A78AF4 /* CameraRenderController.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CameraRenderController.h; path = "cordova-plugin-camera-preview/CameraRenderController.h"; sourceTree = "<group>"; };
+		472B2812C68247119C1CA11A /* CameraPreview.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CameraPreview.m; path = "cordova-plugin-camera-preview/CameraPreview.m"; sourceTree = "<group>"; };
+		4E73696851304256B52E0E49 /* OpenGLES.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		59EE772EA8384E2DA21DEBC3 /* TemperatureAndTint.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = TemperatureAndTint.m; path = "cordova-plugin-camera-preview/TemperatureAndTint.m"; sourceTree = "<group>"; };
+		633BD38FDB3249CEB874B786 /* GLKit.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		6AFF5BF81D6E424B00AB3073 /* CDVLaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = CDVLaunchScreen.storyboard; path = DistanceApp/CDVLaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
+		7F45394180564DC683CCC4DF /* QuartzCore.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* DistanceApp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "DistanceApp-Info.plist"; path = "DistanceApp/DistanceApp-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = SOURCE_ROOT; };
+		9757AAD2A1314E88BE00F000 /* CDVLocation.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVLocation.h; path = "cordova-plugin-geolocation/CDVLocation.h"; sourceTree = "<group>"; };
+		AB901E9A70F147CE939AED8D /* CoreVideo.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		ACC66513C8494E48BE086FDB /* ImageIO.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		B3679D330139453DB136213C /* CameraSessionManager.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CameraSessionManager.m; path = "cordova-plugin-camera-preview/CameraSessionManager.m"; sourceTree = "<group>"; };
+		B7074FDC2DCE4140A3FC7827 /* CDVLocation.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVLocation.m; path = "cordova-plugin-geolocation/CDVLocation.m"; sourceTree = "<group>"; };
+		C30A87CF8ADD41B4B59D1776 /* CameraPreview.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CameraPreview.h; path = "cordova-plugin-camera-preview/CameraPreview.h"; sourceTree = "<group>"; };
+		CF565C46E63749FCAF55C6EC /* CoreImage.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		DFF7926D25D7A3AB79B368C6 /* libPods-DistanceApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DistanceApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
-		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = "DistanceApp/config.xml"; sourceTree = "<group>"; };
-		ED33DF2A687741AEAF9F8254 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "Bridging-Header.h"; sourceTree = "<group>"; };
-		02FD13183ED24FE2A70FA0CA /* CDVLocation.m */ = {isa = PBXFileReference; name = "CDVLocation.m"; path = "cordova-plugin-geolocation/CDVLocation.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
-		F6084AF749A44AABA128C0EC /* CDVLocation.h */ = {isa = PBXFileReference; name = "CDVLocation.h"; path = "cordova-plugin-geolocation/CDVLocation.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		E855E84B885441C9A3798715 /* CoreLocation.framework */ = {isa = PBXFileReference; name = "CoreLocation.framework"; path = "System/Library/Frameworks/CoreLocation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
-		4E39662FB6B84B3484CBDFE4 /* CameraPreview.m */ = {isa = PBXFileReference; name = "CameraPreview.m"; path = "cordova-plugin-camera-preview/CameraPreview.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
-		827F6128281948DEBD7970EB /* TemperatureAndTint.m */ = {isa = PBXFileReference; name = "TemperatureAndTint.m"; path = "cordova-plugin-camera-preview/TemperatureAndTint.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
-		61253BEB766543B68ABB95A3 /* CameraSessionManager.m */ = {isa = PBXFileReference; name = "CameraSessionManager.m"; path = "cordova-plugin-camera-preview/CameraSessionManager.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
-		5A4295189CEE4C26B6D88F94 /* CameraRenderController.m */ = {isa = PBXFileReference; name = "CameraRenderController.m"; path = "cordova-plugin-camera-preview/CameraRenderController.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
-		B6646A4792FC4E5880551E02 /* CameraPreview.h */ = {isa = PBXFileReference; name = "CameraPreview.h"; path = "cordova-plugin-camera-preview/CameraPreview.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		F29DC76355B34FA4ADEEF53E /* TemperatureAndTint.h */ = {isa = PBXFileReference; name = "TemperatureAndTint.h"; path = "cordova-plugin-camera-preview/TemperatureAndTint.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		86D2AF5A1859476CB45C91AD /* CameraSessionManager.h */ = {isa = PBXFileReference; name = "CameraSessionManager.h"; path = "cordova-plugin-camera-preview/CameraSessionManager.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		4D41F12197AE415F81A9F83A /* CameraRenderController.h */ = {isa = PBXFileReference; name = "CameraRenderController.h"; path = "cordova-plugin-camera-preview/CameraRenderController.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		230C07F26E6A4DBFBFC267EA /* ImageIO.framework */ = {isa = PBXFileReference; name = "ImageIO.framework"; path = "System/Library/Frameworks/ImageIO.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
-		F38D4A5A529A4C19958F9987 /* CoreImage.framework */ = {isa = PBXFileReference; name = "CoreImage.framework"; path = "System/Library/Frameworks/CoreImage.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
-		7A59BCD313D94F6180561D31 /* OpenGLES.framework */ = {isa = PBXFileReference; name = "OpenGLES.framework"; path = "System/Library/Frameworks/OpenGLES.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
-		FA6C11895B3F418D8C1E2C17 /* GLKit.framework */ = {isa = PBXFileReference; name = "GLKit.framework"; path = "System/Library/Frameworks/GLKit.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
-		FDCFA5FD7AB04FC99A268B62 /* CoreVideo.framework */ = {isa = PBXFileReference; name = "CoreVideo.framework"; path = "System/Library/Frameworks/CoreVideo.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
-		7124D7D4410B4A0E908F09BB /* QuartzCore.framework */ = {isa = PBXFileReference; name = "QuartzCore.framework"; path = "System/Library/Frameworks/QuartzCore.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		ED33DF2A687741AEAF9F8254 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		F136F2E760534CEB864B4941 /* CameraRenderController.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CameraRenderController.m; path = "cordova-plugin-camera-preview/CameraRenderController.m"; sourceTree = "<group>"; };
+		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = DistanceApp/config.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,13 +100,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
-				EDE71080308F46839725FE43 /* CoreLocation.framework in Frameworks */,
-				C3304E778FDD4710BF13A6BE /* ImageIO.framework in Frameworks */,
-				FC98A91BAA10420FBFC02093 /* CoreImage.framework in Frameworks */,
-				CD47CFDE049A4C199CE8298A /* OpenGLES.framework in Frameworks */,
-				726895F760D44A44937BE035 /* GLKit.framework in Frameworks */,
-				79D6A1C5D7D2435CBF60FB62 /* CoreVideo.framework in Frameworks */,
-				701B6CA8D08D4BE7B15F9C93 /* QuartzCore.framework in Frameworks */,
+				D7F2C760AD694C34A41033BC /* ImageIO.framework in Frameworks */,
+				7C7FAA1021994C0A9E6F0C09 /* CoreLocation.framework in Frameworks */,
+				2E17DAE7E58647D7AD2D9BEA /* CoreImage.framework in Frameworks */,
+				90BCFB17A03B467CAA739097 /* OpenGLES.framework in Frameworks */,
+				90E38AACA7664611AD249D41 /* GLKit.framework in Frameworks */,
+				A6AD12131EB549BCA5CC4A21 /* CoreVideo.framework in Frameworks */,
+				68A7FD7AB0234293BF2758EB /* QuartzCore.framework in Frameworks */,
+				87596C20CAE939F041CFF690 /* libPods-DistanceApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,7 +124,7 @@
 				1D3623250D0F684500981E51 /* AppDelegate.m */,
 			);
 			name = Classes;
-			path = "DistanceApp/Classes";
+			path = DistanceApp/Classes;
 			sourceTree = SOURCE_ROOT;
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -133,13 +141,14 @@
 				EB87FDF41871DAF40020F90C /* config.xml */,
 				EB87FDF31871DA8E0020F90C /* www */,
 				EB87FDF11871DA420020F90C /* Staging */,
-				301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */,
+				301BF52D109A57CC0062928A /* CordovaLib/CordovaLib.xcodeproj */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				307C750510C5A3420062BCA9 /* Plugins */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				E840BD41D0BA000D1CD6D3C6 /* Pods */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -152,7 +161,7 @@
 				ED33DF2A687741AEAF9F8254 /* Bridging-Header.h */,
 			);
 			name = "Other Sources";
-			path = "DistanceApp";
+			path = DistanceApp;
 			sourceTree = "<group>";
 		};
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
@@ -164,19 +173,20 @@
 				6AFF5BF81D6E424B00AB3073 /* CDVLaunchScreen.storyboard */,
 			);
 			name = Resources;
-			path = "DistanceApp/Resources";
+			path = DistanceApp/Resources;
 			sourceTree = "<group>";
 		};
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E855E84B885441C9A3798715 /* CoreLocation.framework */,
-				230C07F26E6A4DBFBFC267EA /* ImageIO.framework */,
-				F38D4A5A529A4C19958F9987 /* CoreImage.framework */,
-				7A59BCD313D94F6180561D31 /* OpenGLES.framework */,
-				FA6C11895B3F418D8C1E2C17 /* GLKit.framework */,
-				FDCFA5FD7AB04FC99A268B62 /* CoreVideo.framework */,
-				7124D7D4410B4A0E908F09BB /* QuartzCore.framework */,
+				ACC66513C8494E48BE086FDB /* ImageIO.framework */,
+				0D2FC75A56E944759F06FB28 /* CoreLocation.framework */,
+				CF565C46E63749FCAF55C6EC /* CoreImage.framework */,
+				4E73696851304256B52E0E49 /* OpenGLES.framework */,
+				633BD38FDB3249CEB874B786 /* GLKit.framework */,
+				AB901E9A70F147CE939AED8D /* CoreVideo.framework */,
+				7F45394180564DC683CCC4DF /* QuartzCore.framework */,
+				DFF7926D25D7A3AB79B368C6 /* libPods-DistanceApp.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -185,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				301BF535109A57CC0062928A /* libCordova.a */,
+				82D832062193BE1F00DB5EC7 /* Cordova.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -202,20 +213,27 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				02FD13183ED24FE2A70FA0CA /* CDVLocation.m */,
-				F6084AF749A44AABA128C0EC /* CDVLocation.h */,
-				4E39662FB6B84B3484CBDFE4 /* CameraPreview.m */,
-				827F6128281948DEBD7970EB /* TemperatureAndTint.m */,
-				61253BEB766543B68ABB95A3 /* CameraSessionManager.m */,
-				5A4295189CEE4C26B6D88F94 /* CameraRenderController.m */,
-				B6646A4792FC4E5880551E02 /* CameraPreview.h */,
-				F29DC76355B34FA4ADEEF53E /* TemperatureAndTint.h */,
-				86D2AF5A1859476CB45C91AD /* CameraSessionManager.h */,
-				4D41F12197AE415F81A9F83A /* CameraRenderController.h */,
+				472B2812C68247119C1CA11A /* CameraPreview.m */,
+				59EE772EA8384E2DA21DEBC3 /* TemperatureAndTint.m */,
+				B3679D330139453DB136213C /* CameraSessionManager.m */,
+				F136F2E760534CEB864B4941 /* CameraRenderController.m */,
+				C30A87CF8ADD41B4B59D1776 /* CameraPreview.h */,
+				00A600BC7CED4ABB81129F85 /* TemperatureAndTint.h */,
+				01DE4360AF924281A2D51D72 /* CameraSessionManager.h */,
+				3FDAC18741834DA4B1A78AF4 /* CameraRenderController.h */,
+				B7074FDC2DCE4140A3FC7827 /* CDVLocation.m */,
+				9757AAD2A1314E88BE00F000 /* CDVLocation.h */,
 			);
 			name = Plugins;
-			path = "DistanceApp/Plugins";
+			path = DistanceApp/Plugins;
 			sourceTree = SOURCE_ROOT;
+		};
+		E840BD41D0BA000D1CD6D3C6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Pods;
+			sourceTree = "<group>";
 		};
 		EB87FDF11871DA420020F90C /* Staging */ = {
 			isa = PBXGroup;
@@ -233,6 +251,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "DistanceApp" */;
 			buildPhases = (
+				46B603C87338E45E89EAFD06 /* [CP] Check Pods Manifest.lock */,
 				304B58A110DAC018002A0835 /* Copy www directory */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -243,8 +262,8 @@
 			dependencies = (
 				301BF551109A68C00062928A /* PBXTargetDependency */,
 			);
-			name = "DistanceApp";
-			productName = "DistanceApp";
+			name = DistanceApp;
+			productName = DistanceApp;
 			productReference = 1D6058910D05DD3D006BFB54 /* DistanceApp.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -255,17 +274,26 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 510;
+				TargetAttributes = {
+					1D6058900D05DD3D006BFB54 = {
+						DevelopmentTeam = 6VHK5753AK;
+					};
+				};
 			};
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "__NON-CLI__" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "DistanceApp" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			productRefGroup = 19C28FACFE9D520D11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectReferences = (
 				{
 					ProductGroup = 301BF52E109A57CC0062928A /* Products */;
-					ProjectRef = 301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */;
+					ProjectRef = 301BF52D109A57CC0062928A /* CordovaLib/CordovaLib.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -281,6 +309,13 @@
 			fileType = archive.ar;
 			path = libCordova.a;
 			remoteRef = 301BF534109A57CC0062928A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		82D832062193BE1F00DB5EC7 /* Cordova.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Cordova.framework;
+			remoteRef = 82D832052193BE1F00DB5EC7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -314,6 +349,28 @@
 			shellScript = "NODEJS_PATH=/usr/local/bin; NVM_NODE_PATH=~/.nvm/versions/node/`nvm version 2>/dev/null`/bin; N_NODE_PATH=`find /usr/local/n/versions/node/* -maxdepth 0 -type d 2>/dev/null | tail -1`/bin; XCODE_NODE_PATH=`xcode-select --print-path`/usr/share/xcs/Node/bin; PATH=$NODEJS_PATH:$NVM_NODE_PATH:$N_NODE_PATH:$XCODE_NODE_PATH:$PATH && node cordova/lib/copy-www-build-step.js";
 			showEnvVarsInLog = 0;
 		};
+		46B603C87338E45E89EAFD06 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DistanceApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -324,11 +381,11 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
-				AACD95B6228F4181B542C8C1 /* CDVLocation.m in Sources */,
-				E713F08B55CB4A2F8DD56850 /* CameraPreview.m in Sources */,
-				77FE84CE086F44CA9B2847AD /* TemperatureAndTint.m in Sources */,
-				ADC24DDFE7EF4BCEB5C976CC /* CameraSessionManager.m in Sources */,
-				8198E29C8326476188B37B58 /* CameraRenderController.m in Sources */,
+				4D99D6F36F3B4D9EBC22477C /* CameraPreview.m in Sources */,
+				F71E672E24D74D91A26B8602 /* TemperatureAndTint.m in Sources */,
+				3802ECD1CBCF4D74A64D866A /* CameraSessionManager.m in Sources */,
+				FB0CF4B7FE0D4D5E8B03BC3F /* CameraRenderController.m in Sources */,
+				96794303FEFD48F7BC6FC5E6 /* CDVLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +410,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 6VHK5753AK;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -362,8 +420,8 @@
 				INFOPLIST_FILE = "DistanceApp/DistanceApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				PRODUCT_NAME = DistanceApp;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				PRODUCT_NAME = "DistanceApp";
 			};
 			name = Debug;
 		};
@@ -377,6 +435,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 6VHK5753AK;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DistanceApp/DistanceApp-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
@@ -384,8 +443,8 @@
 				INFOPLIST_FILE = "DistanceApp/DistanceApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				PRODUCT_NAME = DistanceApp;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				PRODUCT_NAME = "DistanceApp";
 			};
 			name = Release;
 		};
@@ -452,7 +511,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "__NON-CLI__" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "DistanceApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,

@@ -15,11 +15,11 @@
         <param name="ios-package" value="CDVGestureHandler" />
         <param name="onload" value="true" />
     </feature>
-    <feature name="Geolocation">
-        <param name="ios-package" value="CDVLocation" />
-    </feature>
     <feature name="CameraPreview">
         <param name="ios-package" onload="true" value="CameraPreview" />
+    </feature>
+    <feature name="Geolocation">
+        <param name="ios-package" value="CDVLocation" />
     </feature>
     <name>DistanceApp</name>
     <description>
@@ -36,6 +36,9 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <config-file overwrite="true" parent="NSCameraUsageDescription" platform="ios" target="*-Info.plist">
+        <string>Allow the app to use your camera</string>
+    </config-file>
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
     <preference name="AllowInlineMediaPlayback" value="false" />
