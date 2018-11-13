@@ -19,9 +19,9 @@
 
 var app = {
     location: {},
-    origLocation: {},
+    startLocation: {},
     walkDistance: 0,
-    secondPress: 0,
+    pressNumber: 0,
     treeTop: 0,
     treeBottom: 0,
     x: 0,
@@ -38,12 +38,6 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
-
-        // onError Callback receives a PositionError object
-        // function onError(error) {
-        //     alert('code: '    + error.code    + '\n' +
-        //         'message: ' + error.message + '\n');
-        // }
 
         // https://www.geodatasource.com/developers/javascript
         function distance(lat1, lon1, lat2, lon2, unit) {
@@ -76,43 +70,6 @@ var app = {
             }
             return dist
         }
-
-        // function distanceStartStop() {
-        //     var options = {
-        //         enableHighAccuracy: true
-        //     };
-        //     app.secondPress = app.secondPress + 1;
-        //     $('#startLocation').text('Stop');
-
-        //     function onSuccess(position) {
-        //         var posAccurancy = Math.round(position.coords.accuracy * 100)/100;
-        //         $('#accuracy').text(posAccurancy);
-        //         console.log('lat: ', position.coords.latitude, 'lon: ', position.coords.longitude)
-
-        //         // On second button press (Stop)
-        //         if(app.secondPress === 2) {
-        //             app.origLocation = app.location;
-        //             app.location = position;
-        //             // Rounded 2 decimal places
-        //             app.walkDistance = Math.round(distance(app.origLocation['coords']['latitude'], app.origLocation['coords']['longitude'], app.location['coords']['latitude'], app.location['coords']['longitude'], 'F') * 100)/100;
-        //             app.location = {};
-        //             app.origLocation = {};
-        //             app.secondPress = 0;
-        //             $('#startLocation').text('Start');
-        //             $('#distance').text(app.walkDistance + ' Feet');
-
-        //             $('#locatorLabel').text('Apache Cordova');
-        //         } else {
-        //             app.location = position;
-        //         }
-        //     };
-
-        //     function onError(e) {
-        //         console.log('error finding location', e)
-        //     };
-
-        //     navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
-        // }
 
         function toRadians (angle) {
             return angle / 180 * Math.PI;
@@ -181,9 +138,6 @@ var app = {
             console.log(speedX)
         }
 
-        // window.addEventListener("devicemotion", handleMotionEvent, true);
-
-
         // Camera
         var options = {
             x: window.screen.width/4,
@@ -228,113 +182,23 @@ var app = {
         document.getElementById("camera").addEventListener("click", cameraFunction);
         document.getElementById("cameraStop").addEventListener("click", cameraFunctionStop);
         
-            var latArr = [];
-            var longArr = [];
+        var latArr = [];
+        var longArr = [];
+        var intervalLocation;
         function accuracyFinder() {
             $('#locatorLabel').text('Locating...'); 
-            app.secondPress = app.secondPress + 1;
+            app.pressNumber = app.pressNumber + 1;
             $('#startLocation').html('Locating....');
             $('#startLocation').addClass('loadButton');
             $('#startLocation').removeClass('startButton');
             $('#startLocation').removeClass('stopButton');
             document.getElementById("startLocation").removeEventListener("click", accuracyFinder);
-            var locator, options;
-            // function success(position) {
-            //     var crd = position.coords;
-            //     if(crd.accuracy < 100) {
-            //         console.log("ACCURATE", crd.accuracy);
-
-            //         var posAccurancy = Math.round(position.coords.accuracy * 100)/100;
-            //         $('#accuracy').text(posAccurancy);
-
-            //         latArr.push(crd.latitude);
-            //         longArr.push(crd.longitude);
-            //         position['coords']['latitude'] = avg(latArr);
-            //         position['coords']['longitude'] = avg(longArr);
-
-            //         if(app.secondPress < 2) {
-            //             $('#startLatLon').html(Math.round(position['coords']['latitude'] * 100) / 100 + '/' + Math.round(position['coords']['longitude'] * 100) / 100);
-            //         } else if(app.secondPress === 2) {
-            //             $('#endLatLon').html(Math.round(app.location['coords']['latitude'] * 100) / 100 + '/' + Math.round(app.location['coords']['longitude'] * 100) / 100);
-            //         }
-
-            //         // commented out to avoid error on ios
-            //         if(latArr.length >= 10) {
-            //             console.log('Avg Lat: ' + position['coords']['latitude'] + '. Avg Long: ' + position['coords']['longitude']);
-            //             console.log('Press number: ' + app.secondPress);
-            //             latArr = [];
-            //             longArr = [];
-            //             navigator.geolocation.clearWatch(locator);
-
-            //             if(app.secondPress < 2) {
-            //                 $('#startLocation').html('Stop Point');
-            //                 $('#startLocation').addClass('stopButton');
-            //                 $('#startLocation').removeClass('loadButton');
-            //                 $('#startLocation').removeClass('startButton');
-            //                 $('#startLatLon').html(Math.round(position['coords']['latitude'] * 100) / 100 + '/' + Math.round(position['coords']['longitude'] * 100) / 100);
-            //                 document.getElementById("startLocation").addEventListener("click", accuracyFinder);
-            //             }
-
-            //             // On second button press (Stop)
-            //             if(app.secondPress === 2) {
-            //                 console.log('Reset', app.location, latArr)
-            //                 app.origLocation = app.location;
-            //                 app.location = position;
-            //                 // Rounded 2 decimal places
-            //                 app.walkDistance = Math.round(distance(app.origLocation['coords']['latitude'], app.origLocation['coords']['longitude'], app.location['coords']['latitude'], app.location['coords']['longitude'], 'F') * 100)/100;
-                            
-            //                 $('#startLocation').html('Start Point');
-            //                 $('#startLocation').removeClass('stopButton');
-            //                 $('#startLocation').removeClass('loadButton');
-            //                 $('#startLocation').addClass('startButton');
-            //                 $('#endLatLon').html(Math.round(app.location['coords']['latitude'] * 100) / 100 + '/' + Math.round(app.location['coords']['longitude'] * 100) / 100);
-            //                 document.getElementById("startLocation").addEventListener("click", accuracyFinder);
-
-            //                 app.location = {};
-            //                 app.origLocation = {};
-            //                 app.secondPress = 0;
-            //                 $('#distance').text(app.walkDistance + ' Feet');
-
-            //                 $('#locatorLabel').text('Apache Cordova');
-            //             } else {
-            //                 app.location = position;
-            //             }
-                    
-            //         }
-            //     } else {
-            //         console.log("Locating", crd.accuracy);
-            //     }
-            //     console.log('Lat: ' + crd.latitude + '. Long: ' + crd.longitude)
-            // }
-
-            // function onError(e) {
-            //     console.log('error finding location', e)
-            //     navigator.geolocation.clearWatch(locator);
-            //     app.secondPress = 1;
-            //     $('#startLocation').html('Start');
-            //     $('#startLocation').removeClass('stopButton');
-            //     $('#startLocation').removeClass('loadButton');
-            //     $('#startLocation').addClass('startButton');
-
-            //     $('#distance').text(app.walkDistance + ' Feet');
-
-            //     $('#locatorLabel').text('Apache Cordova');
-            //     return;
-            // };
-
-
-            // options = {
-            //   enableHighAccuracy: true,
-            //   timeout: 30000
-            // };
-
-            // locator = navigator.geolocation.watchPosition(success, onError, options);
-
+            var locator, movingLocation, options;
 
             function successForLoop(position) {
                 var crd = position.coords;
                 if(crd.accuracy < 100) {
-                    console.log("ACCURATE", crd.accuracy);
+                    console.log("ACCURACY", crd.accuracy, app.location);
 
                     var posAccurancy = Math.round(position.coords.accuracy * 100)/100;
                     $('#accuracy').text(posAccurancy);
@@ -344,37 +208,83 @@ var app = {
                     position['coords']['latitude'] = avg(latArr);
                     position['coords']['longitude'] = avg(longArr);
 
-                    if(app.secondPress < 2) {
+                    // console.log('Press number: ' + app.pressNumber);
+                    if(app.pressNumber < 2 && jQuery.isEmptyObject(app.location)) {
                         $('#startLatLon').html(Math.round(position['coords']['latitude'] * 1000000) / 1000000 + '/' + Math.round(position['coords']['longitude'] * 1000000) / 1000000);
-                    } else if(app.secondPress === 2) {
-                        $('#endLatLon').html(Math.round(app.location['coords']['latitude'] * 1000000) / 1000000 + '/' + Math.round(app.location['coords']['longitude'] * 1000000) / 1000000);
+                    } else if(app.pressNumber === 1) {
+                        $('#movingLatLon').html(Math.round(crd['latitude'] * 1000000) / 1000000 + '/' + Math.round(crd['longitude'] * 1000000) / 1000000);
+                        var movingDistance = Math.round(distance(app.location['coords']['latitude'], app.location['coords']['longitude'], crd['latitude'], crd['longitude'], 'F') * 100)/100;
+                        $('#movingDistance').text(movingDistance + ' Feet');
+
+                        // Displays Accuracy
+                        $('#accuracy').text(posAccurancy);
+                    } else if(app.pressNumber === 2) {
+                        // console.log(app.location, app.location['coords']['latitude'])
+                        $('#endLatLon').html(Math.round(position['coords']['latitude'] * 1000000) / 1000000 + '/' + Math.round(position['coords']['longitude'] * 1000000) / 1000000);
                     }
 
                     // commented out to avoid error on ios
                     if(latArr.length >= 10) {
                         console.log('Avg Lat: ' + position['coords']['latitude'] + '. Avg Long: ' + position['coords']['longitude']);
-                        console.log('Press number: ' + app.secondPress);
+                        console.log('Press number: ' + app.pressNumber);
+                        // clearInterval(intervalLocation);
                         latArr = [];
                         longArr = [];
-                        navigator.geolocation.clearWatch(locator);
 
-                        if(app.secondPress < 2) {
+                        if(app.pressNumber < 2 && jQuery.isEmptyObject(app.location)) {
+
                             $('#startLocation').html('Stop Point');
                             $('#startLocation').addClass('stopButton');
                             $('#startLocation').removeClass('loadButton');
                             $('#startLocation').removeClass('startButton');
                             $('#startLatLon').html(Math.round(position['coords']['latitude'] * 1000000) / 1000000 + '/' + Math.round(position['coords']['longitude'] * 1000000) / 1000000);
                             document.getElementById("startLocation").addEventListener("click", accuracyFinder);
-                            clearInterval(intervalLocation);
+                            // clearInterval(movingLocation);
+                            // clearInterval(intervalLocation);
+
+                            // console.log('app.pressNumber === 1 && !jQuery.isEmptyObject(app.location)', app.pressNumber, app.pressNumber === 1, !jQuery.isEmptyObject(app.location))
+                            // if(app.pressNumber === 1) { //  && !jQuery.isEmptyObject(app.location)
+                            //     function success(pos) {
+                            //         var crd = pos.coords;
+
+                            //       // if (target.latitude === crd.latitude && target.longitude === crd.longitude) {
+                            //       //   console.log('Congratulations, you reached the target');
+                            //       //   navigator.geolocation.clearWatch(movingLocation);
+                            //       // }
+                            //         // Displays moving distance (Distance while moving from start to stop point)
+                            //         $('#movingLatLon').html(Math.round(crd['latitude'] * 1000000) / 1000000 + '/' + Math.round(crd['longitude'] * 1000000) / 1000000);
+                            //         var movingDistance = Math.round(distance(app.location['coords']['latitude'], app.location['coords']['longitude'], crd['latitude'], crd['longitude'], 'F') * 100)/100;
+                            //         $('#movingDistance').text(movingDistance + ' Feet');
+
+                            //         // Displays Accuracy
+                            //         var posAccurancy = Math.round(crd.accuracy * 100)/100;
+                            //         $('#accuracy').text(posAccurancy);
+                            //     }
+
+                            //     function error(err) {
+                            //       console.warn('ERROR(' + err.code + '): ' + err.message);
+                            //     }
+
+                            //     options = {
+                            //       enableHighAccuracy: true,
+                            //       timeout: 5000,
+                            //       maximumAge: 0
+                            //     };
+                            //     // movingLocation = navigator.geolocation.watchPosition(success, error, options);
+                            //     movingLocation = setInterval(function() {   
+                            //         navigator.geolocation.getCurrentPosition(success, error, options);
+                            //     }, 500);
+                            // }
                         }
 
                         // On second button press (Stop)
-                        if(app.secondPress === 2) {
+                        if(app.pressNumber === 2) {
+                        
                             console.log('Reset', app.location, latArr)
-                            app.origLocation = app.location;
+                            app.startLocation = app.location;
                             app.location = position;
                             // Rounded 2 decimal places
-                            app.walkDistance = Math.round(distance(app.origLocation['coords']['latitude'], app.origLocation['coords']['longitude'], app.location['coords']['latitude'], app.location['coords']['longitude'], 'F') * 100)/100;
+                            app.walkDistance = Math.round(distance(app.startLocation['coords']['latitude'], app.startLocation['coords']['longitude'], app.location['coords']['latitude'], app.location['coords']['longitude'], 'F') * 100)/100;
                             
                             $('#startLocation').html('Start Point');
                             $('#startLocation').removeClass('stopButton');
@@ -384,8 +294,10 @@ var app = {
                             document.getElementById("startLocation").addEventListener("click", accuracyFinder);
 
                             app.location = {};
-                            app.origLocation = {};
-                            app.secondPress = 0;
+                            app.startLocation = {};
+                            app.pressNumber = 0;
+                            // navigator.geolocation.clearWatch(movingLocation);
+                            // clearInterval(movingLocation);
                             clearInterval(intervalLocation);
                             $('#distance').text(app.walkDistance + ' Feet');
 
@@ -395,10 +307,14 @@ var app = {
                         }
                     
                     }
+
+                    
+                    
+
                 } else {
                     console.log("Locating", crd.accuracy);
                 }
-                console.log('Lat: ' + crd.latitude + '. Long: ' + crd.longitude)
+                // console.log('Lat: ' + crd.latitude + '. Long: ' + crd.longitude)
             }
 
             var optionsForLoop = {
@@ -408,7 +324,7 @@ var app = {
 
             function onErrorForLoop(e) {
                 console.log('error finding location', e)
-                app.secondPress = 1;
+                app.pressNumber = 1;
                 $('#startLocation').html('Start');
                 $('#startLocation').removeClass('stopButton');
                 $('#startLocation').removeClass('loadButton');
@@ -420,11 +336,16 @@ var app = {
                 return;
             };
 
-            // for (var i = 0; i < 10; i++) {
-            // }
-            var intervalLocation = setInterval(function() {   
-                navigator.geolocation.getCurrentPosition(successForLoop, onErrorForLoop, optionsForLoop);
-            }, 1000);
+            if(app.pressNumber === 0) {
+                clearInterval(intervalLocation);
+            }
+            
+            if(app.pressNumber === 1) {
+                intervalLocation = setInterval(function() {   
+                    navigator.geolocation.getCurrentPosition(successForLoop, onErrorForLoop, optionsForLoop);
+                }, 900);
+            }
+
         }
 
         function avg(arr) {
@@ -457,7 +378,6 @@ var app = {
              document.body.appendChild(mapCanvas);
             var map = new google.maps.Map(mapCanvas, mapOptions);
         }
-    // document.getElementById("mapsInitial").addEventListener("click", initialize);
         document.getElementById("mapsInitial").addEventListener("click", initialize);
     },
 
