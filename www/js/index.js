@@ -208,22 +208,20 @@ var app = {
                     position['coords']['latitude'] = avg(latArr);
                     position['coords']['longitude'] = avg(longArr);
 
-                    // console.log('Press number: ' + app.pressNumber);
+                    // Displays Accuracy
+                    $('#accuracy').text(posAccurancy);
+
                     if(app.pressNumber < 2 && jQuery.isEmptyObject(app.location)) {
                         $('#startLatLon').html(Math.round(position['coords']['latitude'] * 1000000) / 1000000 + '/' + Math.round(position['coords']['longitude'] * 1000000) / 1000000);
                     } else if(app.pressNumber === 1) {
                         $('#movingLatLon').html(Math.round(crd['latitude'] * 1000000) / 1000000 + '/' + Math.round(crd['longitude'] * 1000000) / 1000000);
                         var movingDistance = Math.round(distance(app.location['coords']['latitude'], app.location['coords']['longitude'], crd['latitude'], crd['longitude'], 'F') * 100)/100;
                         $('#movingDistance').text(movingDistance + ' Feet');
-
-                        // Displays Accuracy
-                        $('#accuracy').text(posAccurancy);
                     } else if(app.pressNumber === 2) {
                         // console.log(app.location, app.location['coords']['latitude'])
                         $('#endLatLon').html(Math.round(position['coords']['latitude'] * 1000000) / 1000000 + '/' + Math.round(position['coords']['longitude'] * 1000000) / 1000000);
                     }
 
-                    // commented out to avoid error on ios
                     if(latArr.length >= 10) {
                         console.log('Avg Lat: ' + position['coords']['latitude'] + '. Avg Long: ' + position['coords']['longitude']);
                         console.log('Press number: ' + app.pressNumber);
@@ -379,6 +377,7 @@ var app = {
             var map = new google.maps.Map(mapCanvas, mapOptions);
         }
         document.getElementById("mapsInitial").addEventListener("click", initialize);
+
     },
 
     // Update DOM on a Received Event
@@ -395,3 +394,23 @@ var app = {
 };
 
 app.initialize();
+
+
+// var map, options, myLatLng;
+// function initMap() {
+//     myLatLng = {lat: 34.052235, lng: -118.243683};
+//     options = {
+//         center: myLatLng,
+//         zoom: 12
+//     }
+
+//     var map = new google.maps.Map(document.getElementById('map'), options);
+
+//     var marker = new google.maps.Marker({
+//         position: myLatLng,
+//         // map: map,
+//         title: 'Hello World!'
+//     });
+
+//     marker.setMap(map);
+// }
