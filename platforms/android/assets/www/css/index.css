@@ -54,7 +54,7 @@ body {
     height:50px;                   /* text area height */
     /*width:225px;*/                   /* text area width */
     text-align:center;
-    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
+    padding:340px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
     /*margin:-115px 0px 0px -112px;*/  /* offset vertical: half of image height and text area height */
                                    /* offset horizontal: half of text area width */
 }
@@ -112,4 +112,59 @@ h1 {
 .blink {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
+}
+
+#measurements, #time {
+    display: block;
+}
+
+.readingsClosed {
+    display: none;
+}
+
+.readingsOpen {
+    display: block;
+    position: absolute;
+    z-index: 1000;
+    height: 100vh;
+    width: 100vw;
+    background: white;   
+}
+
+/* For collapsible data */
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+p {
+    -webkit-user-select: all;  /* Chrome all / Safari all */
+    -moz-user-select: all;     /* Firefox all */
+    -ms-user-select: all;      /* IE 10+ */
+    user-select: all; 
+}
+
+a {
+    text-decoration: none;
+    color: white;
 }

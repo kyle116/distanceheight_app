@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<style type="text/css">
+ html, body {
+     margin: 0;
+     padding: 0;
+     height: 100%;
+    width: 100%;
+ }
+
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 70%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="map"></div>
+    <div id="marker1"></div>
+    <div id="marker2"></div>
+    <div id="current">Nothing yet...</div>
+
+    <select id="units">
+        <option value="Miles">Miles</option>
+        <option value="Feet">Feet</option>
+        <option value="Kilometers">Kilometers</option>
+        <option value="Nautical Miles">Nautical Miles</option>
+        <option value="Yards">Yards</option>
+    </select>
+
+    <script>
+        var options, myLatLng;
+        var marker1;
+        var marker2;
+
+        var units = document.getElementById('units');
+
+        function initMap() {
+            // {lat: 34.1204, lng: -118.1222} // Lacy Park
+            // {lat: 34.052235, lng: -118.243683} // Downtown LA
+            // {lat: 34.0141, lng: -118.2879} // LA Coliseum
+            // {lat: 34.0739, lng: -118.2400} // Dodger Stadium
+            myLatLng = {lat: 34.1204, lng: -118.1222};
+            options = {
+                center: myLatLng,
+                zoom: 20,
+                mapTypeId: google.maps.MapTypeId.HYBRID
+            }
+
+            var map = new google.maps.Map(document.getElementById('map'), options);
+
+
+            var markerCount = 0;
+            var distanceBetween = 0;
+
+            google.maps.event.addListener(map, 'click', function(event) {
+                markerCount += 1;
+                if(markerCount === 1) {
+                    marker1 = placeMarker(event.latLng);
+                    // console.log('marker1', marker1.position, marker1.position.lat())
+                } else if(markerCount === 2) {
+                    marker2 = placeMarker(event.latLng);
+                    drawLine(marker1.position, marker2.position);
+                    distanceBetween = distance(marker1.position.lat(), marker1.position.lng(), marker2.position.lat(), marker2.position.lng(), units.value);
+                }
+                render();
+
+                google.maps.event.addListener(marker1, 'dragend', function(evt){
+                    distanceBetween = distance(marker1.position.lat(), marker1.position.lng(), marker2.position.lat(), marker2.position.lng(), units.value);
+                    document.getElementById('current').innerHTML = '<p>Marker 1 dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + ' Distance: ' + distanceBetween.toFixed(3) + ' ' + units.value + '</p>';
+                    line.setMap(null);
+                    drawLine(marker1.position, marker2.position);
+                    render();
+                });
+
+                google.maps.event.addListener(marker1, 'dragstart', function(evt){
+                    document.getElementById('current').innerHTML = '<p>Currently dragging marker...</p>';
+                });
+
+
+                google.maps.event.addListener(marker2, 'dragend', function(evt){
+                    distanceBetween = distance(marker1.position.lat(), marker1.position.lng(), marker2.position.lat(), marker2.position.lng(), units.value);
+                    document.getElementById('current').innerHTML = '<p>Marker 2 dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + ' Distance: ' + distanceBetween.toFixed(3) + ' ' + units.value + '</p>';
+                    line.setMap(null);
+                    drawLine(marker1.position, marker2.position);
+                    render();
+                });
+
+                google.maps.event.addListener(marker2, 'dragstart', function(evt){
+                    document.getElementById('current').innerHTML = '<p>Currently dragging marker...</p>';
+                });
+            });
+
+            var myMarker, line;
+            function placeMarker(location) {
+                return myMarker = new google.maps.Marker({
+                    position: location,
+                    draggable: true,
+                    map: map
+                });
+            }
+
+            function drawLine(latLon1, latLon2) {
+                var lineSymbol = {
+                    path: 'M 0,-1 0,1',
+                    strokeOpacity: 1,
+                    scale: 4
+                };
+
+                line = new google.maps.Polyline({
+                    path: [latLon1, latLon2],
+                    strokeColor: "#FF0000",
+                    strokeOpacity: 0,
+                    icons: [{
+                        icon: lineSymbol,
+                        offset: '0',
+                        repeat: '25px'
+                    }],
+                    map: map
+                });
+            }
+            
+        }
+
+        function distance(lat1, lon1, lat2, lon2, unit) {
+            var radlat1 = Math.PI * lat1/180;
+            var radlat2 = Math.PI * lat2/180;
+            var theta = lon1 - lon2;
+            var radtheta = Math.PI * theta/180;
+            var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+            if (dist > 1) {
+                dist = 1;
+            }
+            dist = Math.acos(dist)
+            dist = dist * 180/Math.PI;
+            dist = dist * 60 * 1.1515; // default is miles
+            switch(unit) {
+                case 'Feet': // feet
+                    dist = dist * 5280;
+                    break;
+                case 'Kilometers': // km
+                    dist = dist * 1.609344;
+                    break;
+                case 'Nautical Miles': // nautical miles
+                    dist = dist * 0.8684;
+                    break;
+                case 'Yards': // yards
+                    dist = dist * 1760;
+                    break;
+                // default:
+                //     dist = dist;
+            }
+            return dist
+        }
+
+        function render() {
+            // marker1.position.lat(), marker1.position.lng(), marker2.position.lat(), marker2.position.lng()
+            document.getElementById('marker1').innerHTML = '<p>Marker 1 Latitude: ' + marker1.position.lat().toFixed(5) + ' Longitude: ' + marker1.position.lng().toFixed(5) + '</p>';
+            marker2 ? document.getElementById('marker2').innerHTML = '<p>Marker 2 Latitude: ' + marker2.position.lat().toFixed(5) + ' Longitude: ' + marker2.position.lng().toFixed(5) + '</p>' : '';
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTKY1KLfTjGDr1bJhlTzgNn_YOGsjliCY&callback=initMap" async defer></script>
+
+</body>
+
+</html>

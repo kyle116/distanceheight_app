@@ -117,6 +117,31 @@
         </script>
     </head>
     <body>
+        <div id="readings" class="readingsClosed">
+           <!--  <button class="but displayReadings">Close Readings</button>
+            <button class="collapsible">Reading 1</button>
+            <div class="content">
+                <p>Start Lat/Lon: </p>
+                <p>End Lat/Lon: </p>
+
+                <p>Starts Lat/Lon: </p>
+                <p>Ends Lat/Lon: </p>
+
+                <p>Distance: </p>
+                <p>Start Accuracy: </p>
+                <p>End Accuracy: </p>
+                <p>Top: </p>
+                <p>Bottom: </p>
+                <p>Height: </p>
+            </div>
+
+            <button class="collapsible">Reading 2</button>
+            <div class="content">
+                <p>Start Points: </p>
+                <p>Start Points: </p>
+                <p>End Points: </p>
+            </div> -->
+        </div>
         <img src="./img/plus.png" class="crosshair">
         <div class="app">
             <h1 id="locatorLabel">Apache Cordova</h1>
@@ -126,13 +151,20 @@
             </div>
         </div>
         <div class="container">
+            <div class="inputs">
+                <label for="measurements">Number of measurements (whole number):</label>
+                <input type="tel" name="measurements" id="measurements">
+
+                <label for="time">Time in mileseconds (1000 = 1 second):</label>
+                <input type="tel" name="time" id="time">
+            </div>
             <div id="buttons" class="column">
                 <button id="startLocation" class="but startButton">Start Point</button>
                 <button id="treeTop" class="but">Top</button>
                 <button id="treeBottom" class="but">Bottom</button>
                 <button id="camera" class="but">Camera</button>
                 <button id="cameraStop" class="but">Camera Stop</button>
-                <button id="mapsInitial" class="but">Maps</button>
+                <button class="but displayReadings">Readings</button>
             </div>
             <div id="output" class="column">
                 <div class="innerColumn">Start Lat/Lon: </div><div id="startLatLon" class="innerColumn">0</div>
@@ -151,8 +183,9 @@
             </div>
         </div>
 
-        <div id="map"></div>
-        <div id="googleMap" style="width:100%;height:400px;"></div>
+
+        <!-- <div id="map"></div> -->
+        <!-- <div id="googleMap" style="width:100%;height:400px;"></div> -->
         
         <!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script> -->
         <!-- <script src="http://maps.google.com/maps/api/js?sensor=false"></script> -->

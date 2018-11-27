@@ -30,6 +30,7 @@ var app = {
     // Application Constructor
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+        typeof localStorage.measurements === 'string' ? '' : localStorage.setItem('measurements', JSON.stringify([]));
     },
 
     // deviceready Event Handler
@@ -78,8 +79,10 @@ var app = {
         function angles(e) {
             if(e.target.id === 'treeTop') {
                 app.treeTop = app.x;
+                measurement.top = app.x;
             } else if(e.target.id === 'treeBottom') {
                 app.treeBottom = app.x;
+                measurement.bottom = app.x;
             }
 
             if(app.treeBottom !== 0 && app.treeTop !== 0) {
@@ -101,9 +104,25 @@ var app = {
                 console.log(angle1, angle2, angle3, angle4, side1, side2, side3, side4)
                 
                 var height = side1 + side3;
+                measurement.height = height;
                 console.log('Height ' + height);
             }
             console.log('app.treeTop: ' + app.treeTop + ' app.treeBottom: ' + app.treeBottom + '. Angle: ' + (app.treeTop - app.treeBottom));
+            var fails = 0;
+            measurementKeys = Object.keys(measurement);
+            for (var i = 0; i < measurementKeys.length; i++) {
+                if(!measurement[measurementKeys[i]]) {
+                    fails++;
+                }
+
+                if(measurementKeys.length - 1 === i && fails === 0) {
+                    var arr = JSON.parse(localStorage.measurements);
+                    arr.push(measurement);
+                    localStorage.setItem('measurements', JSON.stringify(arr));
+                    measurement = {};
+                }
+            }
+            console.log(measurement)
             $('#outputTop').text(Math.round(app.treeTop * 100)/100 + ' Degrees');
             $('#outputBottom').text(Math.round(app.treeBottom * 100)/100 + ' Degrees');
             $('#outputHeight').text(Math.round(height * 100)/100 + ' Feet');
@@ -175,16 +194,112 @@ var app = {
         } else {
             console.log('error')
         }
+
+        function displayReadings() {
+            window.scrollTo(0, 0);
+            $('#readings').toggleClass('readingsClosed');
+            $('#readings').toggleClass('readingsOpen');
+
+            if($('#readings').hasClass('readingsOpen')) {
+                var measurementsStorage = JSON.parse(localStorage.measurements);
+                var htmlContents = '<button id="closeReadings" class="but displayReadings">Close Readings</button>';
+                var emailBody = '';
+                for (var i = 0; i < measurementsStorage.length; i++) {
+                    emailBody += 
+                        `<b>Measurement ${i + 1}</b>
+                        Start Lat/Lon: ${JSON.stringify(measurementsStorage[i].finalStart.lat + '/' + measurementsStorage[i].finalStart.long)}\n
+                        End Lat/Lon: ${JSON.stringify(measurementsStorage[i].finalEnd.lat + '/' + measurementsStorage[i].finalEnd.long)}\n
+                        Start Points Measured Lat/Lon: ${JSON.stringify(measurementsStorage[i].startPoints)}\n
+                        End Points Observed Lat/Lon: ${JSON.stringify(measurementsStorage[i].endPoints)}\n
+                        Distance: ${measurementsStorage[i].distance}
+                        Start Accuracy: ${avg(measurementsStorage[i].stAcc)}
+                        End Accuracy: ${avg(measurementsStorage[i].enAcc)}
+                        Top: ${measurementsStorage[i].top}
+                        Bottom: ${measurementsStorage[i].bottom}
+                        Height: ${measurementsStorage[i].height}\n\n`
+                    htmlContents += 
+                        `<button class="collapsible">Measurement ${i + 1}</button>
+                        <div class="content">
+                            <p>
+                                Start Lat/Lon:<br/> ${JSON.stringify(measurementsStorage[i].finalStart.lat + '/' + measurementsStorage[i].finalStart.long)}<br/>
+                                End Lat/Lon:<br/> ${JSON.stringify(measurementsStorage[i].finalEnd.lat + '/' + measurementsStorage[i].finalEnd.long)}<br/>
+                                Start Points Measured Lat/Lon: ${JSON.stringify(measurementsStorage[i].startPoints)}<br/>
+                                End Points Observed Lat/Lon: ${JSON.stringify(measurementsStorage[i].endPoints)}<br/>
+                                Distance: ${measurementsStorage[i].distance}<br/>
+                                Start Accuracy: ${avg(measurementsStorage[i].stAcc)}<br/>
+                                End Accuracy: ${avg(measurementsStorage[i].enAcc)}<br/>
+                                Top: ${measurementsStorage[i].top}<br/>
+                                Bottom: ${measurementsStorage[i].bottom}<br/>
+                                Height: ${measurementsStorage[i].height}<br/>
+                            </p>
+                        </div>`;
+                }
+                $('#readings').html(htmlContents);
+                $('#closeReadings').after(`<button class="but"><a  href="mailto:?body=${encodeURI(emailBody)}">Email Results</a></button>`);
+                createCollapsible();
+                for (var i = 0; i < toggleReadings.length; i++) {
+                    toggleReadings[i].addEventListener('click', displayReadings);
+                }
+            }
+        }
         
         document.getElementById("startLocation").addEventListener("click", accuracyFinder);
         document.getElementById("treeTop").addEventListener("click", angles);
         document.getElementById("treeBottom").addEventListener("click", angles);
         document.getElementById("camera").addEventListener("click", cameraFunction);
         document.getElementById("cameraStop").addEventListener("click", cameraFunctionStop);
+        document.getElementById("measurements").addEventListener("change", function() {
+            numberOfMeasurements = $('#measurements').val() !== '' ? $('#measurements').val() : 5;
+        });
+        document.getElementById("time").addEventListener("change", function() {
+            timeOfInterval = $('#time').val() !== '' ? $('#time').val() : 500;
+        });
+
+        var toggleReadings = document.getElementsByClassName("displayReadings");
+
+        for (var i = 0; i < toggleReadings.length; i++) {
+            toggleReadings[i].addEventListener('click', displayReadings);
+        }
+        // document.getElementById("displayReadings").addEventListener("click", displayReadings);
         
-        var latArr = [];
-        var longArr = [];
+        var startLatArr = [];
+        var startLongArr = [];
+        var startAccuracies = [];
+        var startPoint, endPoint;
+        var endLatArr = [];
+        var endLongArr = [];
+        var endAccuracies = [];
         var intervalLocation;
+        var numberOfMeasurements = $('#measurements').val() ? $('#measurements').val() : 5;
+        var timeOfInterval = $('#time').val() ? $('#time').val() : 500;
+        var measurement;
+        var measurementKeys;
+        function Measurement(startPoints, endPoints, accuracies1, accuracies2, distance, top, bottom, height) {
+            // constructor(startPoints, endPoints, accuracies1, accuracies2, distance, top, bottom, height) {
+                this.startPoints = startPoints;
+                this.finalStart;
+                this.endPoints = endPoints;
+                this.finalEnd;
+                this.stAcc = accuracies1;
+                this.enAcc = accuracies2;
+                this.distance = distance;
+                this.top = top;
+                this.bottom = bottom;
+                this.height = height;
+            // }
+        }
+        function pointsToArray(lats, longs) {
+            var returnArr = [];
+            for (var i = 0; i < lats.length; i++) {
+                var tempObj = {
+                    lat: lats[i],
+                    long: longs[i]
+                }
+                returnArr.push(tempObj);
+            }
+            return returnArr;
+        }
+
         function accuracyFinder() {
             $('#locatorLabel').text('Locating...'); 
             app.pressNumber = app.pressNumber + 1;
@@ -203,31 +318,42 @@ var app = {
                     var posAccurancy = Math.round(position.coords.accuracy * 100)/100;
                     $('#accuracy').text(posAccurancy);
 
-                    latArr.push(crd.latitude);
-                    longArr.push(crd.longitude);
-                    position['coords']['latitude'] = avg(latArr);
-                    position['coords']['longitude'] = avg(longArr);
+                    if(app.pressNumber === 1 && startLatArr.length < numberOfMeasurements) {
+                        startLatArr.push(crd.latitude);
+                        startLongArr.push(crd.longitude);
+                        startAccuracies.push(crd.accuracy);
+                        position['coords']['latitude'] = avg(startLatArr);
+                        position['coords']['longitude'] = avg(startLongArr);
+                    } else if(app.pressNumber === 2) {
+                        endLatArr.push(crd.latitude);
+                        endLongArr.push(crd.longitude);
+                        endAccuracies.push(crd.accuracy);
+                        position['coords']['latitude'] = avg(endLatArr);
+                        position['coords']['longitude'] = avg(endLongArr);
+                    }
 
                     // Displays Accuracy
                     $('#accuracy').text(posAccurancy);
 
                     if(app.pressNumber < 2 && jQuery.isEmptyObject(app.location)) {
+                        startPoint = {lat: position['coords']['latitude'], long: position['coords']['longitude']};
                         $('#startLatLon').html(Math.round(position['coords']['latitude'] * 1000000) / 1000000 + '/' + Math.round(position['coords']['longitude'] * 1000000) / 1000000);
                     } else if(app.pressNumber === 1) {
                         $('#movingLatLon').html(Math.round(crd['latitude'] * 1000000) / 1000000 + '/' + Math.round(crd['longitude'] * 1000000) / 1000000);
                         var movingDistance = Math.round(distance(app.location['coords']['latitude'], app.location['coords']['longitude'], crd['latitude'], crd['longitude'], 'F') * 100)/100;
                         $('#movingDistance').text(movingDistance + ' Feet');
                     } else if(app.pressNumber === 2) {
+                        endPoint = {lat: position['coords']['latitude'], long: position['coords']['longitude']};
                         // console.log(app.location, app.location['coords']['latitude'])
                         $('#endLatLon').html(Math.round(position['coords']['latitude'] * 1000000) / 1000000 + '/' + Math.round(position['coords']['longitude'] * 1000000) / 1000000);
                     }
 
-                    if(latArr.length >= 10) {
+                    if((startLatArr.length >= numberOfMeasurements && app.pressNumber === 1) || (endLatArr.length >= numberOfMeasurements && app.pressNumber === 2)) {
                         console.log('Avg Lat: ' + position['coords']['latitude'] + '. Avg Long: ' + position['coords']['longitude']);
                         console.log('Press number: ' + app.pressNumber);
                         // clearInterval(intervalLocation);
-                        latArr = [];
-                        longArr = [];
+                        // latArr = [];
+                        // longArr = [];
 
                         if(app.pressNumber < 2 && jQuery.isEmptyObject(app.location)) {
 
@@ -277,13 +403,16 @@ var app = {
 
                         // On second button press (Stop)
                         if(app.pressNumber === 2) {
-                        
-                            console.log('Reset', app.location, latArr)
                             app.startLocation = app.location;
                             app.location = position;
                             // Rounded 2 decimal places
                             app.walkDistance = Math.round(distance(app.startLocation['coords']['latitude'], app.startLocation['coords']['longitude'], app.location['coords']['latitude'], app.location['coords']['longitude'], 'F') * 100)/100;
-                            
+                            measurement = new Measurement(undefined, undefined, startAccuracies, endAccuracies, app.walkDistance, undefined, undefined, undefined);
+                            measurement.startPoints = pointsToArray(startLatArr, startLongArr);
+                            measurement.endPoints = pointsToArray(endLatArr, endLongArr);
+                            measurement.finalStart = startPoint;
+                            measurement.finalEnd = endPoint;
+
                             $('#startLocation').html('Start Point');
                             $('#startLocation').removeClass('stopButton');
                             $('#startLocation').removeClass('loadButton');
@@ -291,6 +420,28 @@ var app = {
                             $('#endLatLon').html(Math.round(app.location['coords']['latitude'] * 1000000) / 1000000 + '/' + Math.round(app.location['coords']['longitude'] * 1000000) / 1000000);
                             document.getElementById("startLocation").addEventListener("click", accuracyFinder);
 
+                            var fails = 0;
+                            measurementKeys = Object.keys(measurement);
+                            for (var i = 0; i < measurementKeys.length; i++) {
+                                if(!measurement[measurementKeys[i]]) {
+                                    fails++;
+                                }
+
+                                if(measurementKeys.length - 1 === i && fails === 0) {
+                                    var arr = JSON.parse(localStorage.measurements);
+                                    arr.push(measurement);
+                                    localStorage.setItem('measurements', JSON.stringify(arr));
+                                    measurement = {};
+                                }
+                            }
+
+                            // Reset all variables for new measurement
+                            startLatArr = [];
+                            startLongArr = [];
+                            startAccuracies = [];
+                            endLatArr = [];
+                            endLongArr = [];
+                            endAccuracies = [];
                             app.location = {};
                             app.startLocation = {};
                             app.pressNumber = 0;
@@ -300,6 +451,7 @@ var app = {
                             $('#distance').text(app.walkDistance + ' Feet');
 
                             $('#locatorLabel').text('Apache Cordova');
+                            console.log('Reset', app.location, measurement)
                         } else {
                             app.location = position;
                         }
@@ -341,7 +493,7 @@ var app = {
             if(app.pressNumber === 1) {
                 intervalLocation = setInterval(function() {   
                     navigator.geolocation.getCurrentPosition(successForLoop, onErrorForLoop, optionsForLoop);
-                }, 900);
+                }, timeOfInterval);
             }
 
         }
@@ -354,29 +506,44 @@ var app = {
             return total/arr.length;
         }
 
-        function myMap() {
-            console.log('clicked')
-            var mapProp= {
-                center:new google.maps.LatLng(51.508742,-0.120850),
-                zoom:5,
-            };
-            var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-        }
-        function initialize() {
-            console.log('fired ')
-            var mapOptions = {
-                zoom: 5,
-                center: new google.maps.LatLng(-34.000009, -56.197645),
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+        // function myMap() {
+        //     console.log('clicked')
+        //     var mapProp= {
+        //         center:new google.maps.LatLng(51.508742,-0.120850),
+        //         zoom:5,
+        //     };
+        //     var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+        // }
+        // function initialize() {
+        //     console.log('fired ')
+        //     var mapOptions = {
+        //         zoom: 5,
+        //         center: new google.maps.LatLng(-34.000009, -56.197645),
+        //         mapTypeId: google.maps.MapTypeId.ROADMAP
+        //     }
+        //     var mapCanvas = document.createElement("div");
+        //     mapCanvas.id = "canvas";
+        //     mapCanvas.style.width = "200px";
+        //     mapCanvas.style.height = "200px";
+        //      document.body.appendChild(mapCanvas);
+        //     var map = new google.maps.Map(mapCanvas, mapOptions);
+        // }
+        // document.getElementById("mapsInitial").addEventListener("click", initialize);
+        function createCollapsible() {
+            var coll = document.getElementsByClassName('collapsible');
+
+            for (var i = 0; i < coll.length; i++) {
+                coll[i].addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    var content = this.nextElementSibling;
+                    if (content.style.display === 'block') {
+                        content.style.display = 'none';
+                    } else {
+                        content.style.display = 'block';
+                    }
+                });
             }
-            var mapCanvas = document.createElement("div");
-            mapCanvas.id = "canvas";
-            mapCanvas.style.width = "200px";
-            mapCanvas.style.height = "200px";
-             document.body.appendChild(mapCanvas);
-            var map = new google.maps.Map(mapCanvas, mapOptions);
         }
-        document.getElementById("mapsInitial").addEventListener("click", initialize);
 
     },
 

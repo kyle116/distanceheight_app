@@ -28,6 +28,8 @@
     <string>1.0.0</string>
     <key>LSApplicationCategoryType</key>
     <string/>
+    <key>LSApplicationQueriesSchemes</key>
+    <array/>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>NSAppTransportSecurity</key>
